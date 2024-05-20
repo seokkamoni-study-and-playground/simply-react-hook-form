@@ -1,8 +1,18 @@
 import { FieldValues } from './fields';
 
-export type UseFormProps<TFieldValues extends FieldValues = FieldValues> = Partial<{
+export type UseFormProps<TFieldValues extends FieldValues> = Partial<{
   defaultValues: TFieldValues;
+  schema: Schema<TFieldValues>;
 }>;
+
+export type FormState<TFieldValues extends FieldValues> = {
+  values: TFieldValues;
+  errors?: Partial<TFieldValues>;
+};
+
+export type Schema<TFieldValues extends FieldValues> = (
+  data: TFieldValues
+) => Partial<TFieldValues>;
 
 export type RegisterOptions = {
   min?: string | number;

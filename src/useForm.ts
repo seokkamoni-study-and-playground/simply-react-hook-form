@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { FieldValues } from './types/fields';
-import { UseFormProps } from './types/form';
+import { FormState, UseFormProps } from './types/form';
 import { createFormControl } from './logic/createFormControl';
 
-export const useForm = <TFieldValues extends FieldValues = FieldValues>({
+export const useForm = <TFieldValues extends FieldValues>({
   defaultValues = {} as TFieldValues,
+  schema,
 }: UseFormProps<TFieldValues>) => {
-  const [formValues, setFormValues] = useState<TFieldValues>(defaultValues);
-  const formControl = createFormControl<TFieldValues>(formValues, setFormValues);
+  const [formState, setFormState] = useState<FormState<TFieldValues>>({
+    values: defaultValues,
+  });
+  const formControl = createFormControl<TFieldValues>(formState, setFormState, schema);
 
   return formControl;
 };

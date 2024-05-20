@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
-const RootLayout = ({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) => {
+type RootLayoutProps = {
+  children: ReactNode
+}
+
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="kr">
       <body>{children}</body>
